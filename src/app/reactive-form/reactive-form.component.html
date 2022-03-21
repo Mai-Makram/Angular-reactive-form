@@ -1,0 +1,60 @@
+<p>reactive-form works!</p>
+
+<div class="container">
+  <h1 class="text-center">Reactive Form</h1>
+    <form [formGroup]="contactForm" (ngSubmit)="onsubmit(contactForm.value)">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">first name</label>
+          <div class="text-danger" *ngIf="myValues['firstName'].invalid && myValues['firstName'].touched" >
+            <small *ngIf="myValues['firstName'].errors?.['required']">*required</small>
+            <small *ngIf="myValues['firstName'].errors?.['minlength']">*minlength is {{myValues['firstName'].errors?.['minlength'].requiredLength}}--- you have actual length {{myValues['firstName'].errors?.['minlength'].actualLength}} </small>
+          </div>
+          <input type="text" class="form-control" id="firstName" formControlName ="firstName" value="yy">
+        </div>
+        
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">last name</label>
+            <div class="text-danger" *ngIf="myValues['lastName'].invalid && myValues['lastName'].touched" >
+              <small *ngIf="myValues['lastName'].errors?.['required']">*required</small>
+              <small *ngIf="myValues['lastName'].errors?.['minlength']">*minlength is {{myValues['lastName'].errors?.['minlength'].requiredLength}}--- you have actual length {{myValues['lastName'].errors?.['minlength'].actualLength}} </small>
+            </div>
+            <input type="text" class="form-control" id="lastName" formControlName ="lastName">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <div class="text-danger" *ngIf="myValues['email'].invalid && myValues['email'].touched" >
+              <small *ngIf="myValues['email'].errors?.['required']">*required</small>
+              <small *ngIf="myValues['email'].errors?.['email']">*PLZ enter valid email </small>
+            </div>
+            <input type="email" class="form-control" id="email" formControlName ="email" aria-describedby="emailHelp">
+          </div>
+
+          <label>Country</label>
+          <select class="form-select mb-3" formControlName ="country">
+            <option *ngFor="let country of countries">{{country.name}}</option>
+          </select>
+          
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="male"  value="Male" formControlName ="gender">
+            <label class="form-check-label" for="male">
+              male
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName ="gender">
+            <label class="form-check-label" for="female">
+             female
+            </label>
+          </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="stutus" formControlName ="isMarried">
+          <label class="form-check-label" for="stutus">is married</label>
+        </div>
+        <button type="submit" class="btn btn-primary"  [disabled]="contactForm.invalid">Submit</button>
+
+      </form>
+</div>
